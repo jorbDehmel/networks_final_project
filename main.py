@@ -59,7 +59,6 @@ if __name__ == '__main__':
 
         # Listen for incoming calls
         print('Starting call listener...')
-        print(my_ip)
         phone.start()
 
         # Delay

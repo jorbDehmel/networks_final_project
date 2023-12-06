@@ -15,27 +15,32 @@ username: str = '101'
 password: str = 'e2f03a2017220'
 my_ip: str = '192.168.1.3'
 
-number: str = '12345'
+number: str = '101'
 
 if __name__ == '__main__':
-    # Create phone object
-    phone: VoIPPhone = VoIPPhone(my_ip, port, username, password, my_ip)
+    try:
 
-    # Register phone
-    print('Registering w/ VoIP server...')
-    phone.start()
+        # Create phone object
+        phone: VoIPPhone = VoIPPhone(server_ip, port, username, password, my_ip)
 
-    # Call some number
-    print('Calling...')
-    call = phone.call(number)
-    print('Connected!')
+        # Register phone
+        print('Registering w/ VoIP server...')
+        phone.start()
 
-    # Sleep for a while
-    time.sleep(20)
+        # Call some number
+        print('Calling...')
+        call = phone.call(number)
+        print('Connected!')
 
-    # End call
-    print('Hanging up.')
-    phone.hangup()
+        # Sleep for a while
+        time.sleep(20)
 
-    # End phone
-    phone.stop()
+        # End call
+        print('Hanging up.')
+        phone.hangup()
+
+        # End phone
+        phone.stop()
+
+    except Exception as e:
+        print(f'Error: {e}')
