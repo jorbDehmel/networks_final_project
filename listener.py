@@ -1,5 +1,9 @@
 '''
-In theory, this should be a call listener.
+Links with a VoIP server via login, listens for calls. When a
+call is received, it plays a local .wav file on the line, then
+hangs up.
+
+Idea from PyVoIP documentation.
 '''
 
 import socket
@@ -8,13 +12,12 @@ import time
 import wave
 
 # Meta variables
-server_ip: str = '192.168.1.100'
-
-port: int = 5060
-username: str = '101'
-password: str = 'e2f03a2017220'
-my_ip: str = '192.168.1.3'
-filepath: str = 'file.wav'
+server_ip: str = '192.168.1.100'        # Server IP address
+port: int = 5060                        # Server port
+username: str = '101'                   # Server username
+password: str = 'e2f03a2017220'         # Server password
+my_ip: str = '192.168.1.3'              # Current IP address    
+filepath: str = 'file.wav'              # File to play over call
 
 # Answer an incoming call
 def answer(call) -> None:
@@ -50,6 +53,7 @@ def answer(call) -> None:
 if __name__ == '__main__':
     try:
         # Create phone object
+        print('Instantiating phone...')
         phone: VoIPPhone = VoIPPhone(server_ip,
             port,
             username,
@@ -58,13 +62,14 @@ if __name__ == '__main__':
             callCallback=answer)
 
         # Listen for incoming calls
-        print('Starting call listener...')
+        print('Registering soft phone...')
         phone.start()
 
         # Delay
-        input('Press enter to halt')
+        input('Press enter to kill phone')
 
         # End phone
+        print('Deregestering soft phone...')
         phone.stop()
 
     except Exception as e:
