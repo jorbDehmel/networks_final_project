@@ -4,6 +4,12 @@ call is received, it plays a local .wav file on the line, then
 hangs up.
 
 Idea from PyVoIP documentation.
+
+# Things you need to run to get it to work:
+# Connect dongle and cable
+sudo ip address flush dev enp0s20f0u1u1c2 &&
+    sudo ip address add 192.168.1.100/24 dev enp0s20f0u1u1c2 &&
+    sudo ip address add 192.168.1.3/24 dev enp0s20f0u1u1c2
 '''
 
 import socket
@@ -54,11 +60,12 @@ if __name__ == '__main__':
     try:
         # Create phone object
         print('Instantiating phone...')
-        phone: VoIPPhone = VoIPPhone(server_ip,
-            port,
-            username,
-            password,
-            my_ip,
+        phone: VoIPPhone = VoIPPhone(
+            server=server_ip,
+            port=port,
+            username=username,
+            password=password,
+            myIP=my_ip,
             callCallback=answer)
 
         # Listen for incoming calls

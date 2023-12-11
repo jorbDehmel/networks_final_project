@@ -13,7 +13,7 @@ server_ip: str = '192.168.1.100'    # Server IP address
 port: int = 5060                    # Server VoIP port
 username: str = '101'               # Username to log into server w/
 password: str = 'e2f03a2017220'     # Password for server
-my_ip: str = '192.168.1.3'          # Local IP address
+my_ip: str = '192.168.1.2'          # Local IP address
 number: str = '101'                 # Number to call on soft phone
 
 if __name__ == '__main__':
